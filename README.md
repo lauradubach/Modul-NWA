@@ -14,6 +14,9 @@
 | /export | Die gesamte Konfiguration des MikroTiks |
 | /ip route print | können wir feststellen, dass eine dynamische Default-Route angelegt wurde |
 | /ping cloud.tbz.ch | ob ein Uplinks ins Internet besteht |
+| /export file=FILENAME | Backup machen |
+| /system/package/update/install | updates machen |
+| /user ssh-keys import public-key-file=id_rsa.pub user=admin | SSH key hinterlegen |
 
 ## VIM commands
 
@@ -25,4 +28,7 @@
 | service network reload | reboot |
 | vim /etc/config/firewall | Firewall-Konfigurationsdatei öffnen |
 
-Labor1 bei punkt 6.3 https://gitlab.com/ch-tbz-wb/Stud/NWA/-/tree/main/2_Unterrichtsressourcen/NWA1_MTCNA/01_Labor_1_DHCP_DNS
+## DNS hinzufügen
+
+In folgendes Verzeichnis wechseln: /ip/dhcp-client 
+Danach folgenden Befehl: add interface=ether2 disable=no
