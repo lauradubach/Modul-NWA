@@ -59,3 +59,6 @@ Nun noch den DNSSEC aktivieren:
 ## DHCP Server Konfig anpassen
 
 ![DHCP Anpassung](image-2.png)
+
+
+Labor 2 Aufgabe 7.
