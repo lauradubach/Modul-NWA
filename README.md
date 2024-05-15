@@ -17,6 +17,7 @@
 | /export file=FILENAME | Backup machen |
 | /system/package/update/install | updates machen |
 | /user ssh-keys import public-key-file=id_rsa.pub user=admin | SSH key hinterlegen |
+| /ip/route/add dst-address 0.0.0.0/0 gateway=192.168.96.1 | Route angeben über Terminal |
 
 ## VIM commands
 
