@@ -53,7 +53,7 @@ Um auf die Website zu kommen muss man noch eine Route öffnen (cmd mit Admin aus
 
 `route add 192.168.96.0 mask 255.255.255.0 192.168.23.135`
 
-erste IP ist die IP des gewählten Netzwerks, die 2te die Maske davon und die 3te die IP des Router R1
+erste IP ist die IP des gewählten Netzwerks, die 2te die Maske davon und die 3te die IP des management netztes
 
 Nun noch den DNSSEC aktivieren:
 ![PI-Hole](image-1.png)
@@ -125,4 +125,18 @@ Vorher die Adressen der Router in der Adress List hinterlegen.
 `/ip firewall filter add action=accept chain=forward protocol=tcp dst-port=22,8291 comment="Connect WINBOX to Routers" src-address=192.168.23.0/24 dst-address-list=routers`
 
 
+4. Port Forwarding
 
+Konfiguriere Port-Forwarding, sodass der Port 2222 auf R1 den Port 22 von R3 weitergeleitet wird.
+`/ip firewall nat add chain=dstnat protocol=tcp dst-port=2222 action=dst-nat to-addresses=192.168.96.1 to-ports=22`
+
+5. Port Trigger Regel
+
+`/ip firewall mangle add action=add-src-to-address-list address-list=portscanblock address-list-timeout=1d chain=prerouting comment="port scan detection rule" dst-port=21,1723,110 in-interface-list=WAN protocol=tcp`
+
+Lege auf der Input- und Forward-Chain eine Firewall-Regel an, die alle Pakete blockiert, dessen Source-IP sich in der Address-list portscanblock befindet
+`/ip firewall filter add action=drop chain=forward comment="forward: default drop portscanblock from WAN" in-interface-list=WAN src-address-list=portscanblock`
+`/ip firewall filter add action=drop chain=input comment="input: default drop portscanblock from WAN" in-interface-list=WAN src-address-list=portscanblock`
+
+Kurze Übung im Unterricht:
+![alt text](image-3.png)
